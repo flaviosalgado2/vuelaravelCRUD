@@ -4,14 +4,23 @@ php artisan serve --host=0.0.0.0 --port=8000
 #remover container
 docker rm ID
 
+#remove todos containers de uma vez
+docker rm -f $(docker ps -aq)
+
 #remover imagens
 docker rmi ID
+
+#remove todas imagens de uma vez
+docker rmi -f $(docker images -aq)
 
 #listar imagens docker
 docker images
 
 #listar containers ativos
 docker ps -a
+
+#para todos containers de uma vez
+docker stop $(docker ps -q)
 
 #refazer container e imagem
 docker-compose up --build -d
@@ -24,6 +33,10 @@ php artisan serve --host=0.0.0.0 & npm run dev -- --host
 
 #entrar no terminal do container
 docker exec -it php83_workspace bash
+docker exec -it php848_workspace_vuelara bash
 
 #expor o Vue no container
 npm run dev -- --host
+
+#ps lista todos processos com detalhes, grep pega saida e filtra
+ps -ef | grep php-fpm

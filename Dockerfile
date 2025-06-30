@@ -1,11 +1,12 @@
 # Use a base PHP 8.3.12 image
-FROM php:8.3.12-fpm
+FROM php:8.4.8-fpm
 
 # Set environment variables
-ARG NODE_VERSION=20  # Usando a versão LTS mais recente do Node.js
+ARG NODE_VERSION=22  # Usando a versão LTS mais recente do Node.js
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    procps \
     git \
     curl \
     zip \
