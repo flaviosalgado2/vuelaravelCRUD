@@ -1,6 +1,25 @@
+<script setup>
+
+let count = $ref(0)
+
+console.log(count)
+
+function incrementar() {
+  count++
+}
+
+</script>
+
 <template>
   <!-- Título -->
   <h1 class="display-4 text-center">About</h1>
+
+  <h2>Contador: {{ count }}</h2>
+
+  <button class="btn btn-secondary" @click="incrementar">Incrementar Contador</button>
+
+  <br>
+  <br>
 
   <!-- Corpo do Texto -->
   <div class="mt-4">
