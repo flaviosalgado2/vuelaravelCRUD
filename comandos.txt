@@ -40,3 +40,18 @@ npm run dev -- --host
 
 #ps lista todos processos com detalhes, grep pega saida e filtra
 ps -ef | grep php-fpm
+
+#update composer seguro, atualiza lock sem quebrar projeto
+composer update --lock
+
+#update composer apenas pacotes seguros que nao quebram projeto
+composer update --with-all-dependencies --prefer-stable
+
+#limpa cache e configs laravel
+php artisan config:clear
+php artisan cache:clear
+php artisan route:clear
+php artisan view:clear
+
+#limpa os caches, substitui os comandos anteriores
+php artisan optimize:clear

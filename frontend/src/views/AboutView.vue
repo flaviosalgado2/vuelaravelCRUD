@@ -1,12 +1,24 @@
 <script setup>
+import { ref, reactive, onMounted, computed } from 'vue'
 
-let count = $ref(0)
+const perfil = reactive({ nome: '', idade: ''})
+const maiorIdade = ref(false)
+const mostrarPerfilIdade = ref(false)
 
-console.log(count)
-
-function incrementar() {
-  count++
+const verificaMaioridade = () => {
+  if(perfil.idade < 18){
+    maiorIdade.value = false
+  } else {
+    maiorIdade.value = true    
+  }
+  mostrarPerfilIdade.value = true
 }
+
+const infoPerfil = computed(() => {
+  return `Meu nome é ${perfil.nome} e eu tenho ${perfil.idade} anos de idade.`
+})
+
+onMounted(() => console.log('Aplicacao montada!'))
 
 </script>
 
@@ -14,9 +26,31 @@ function incrementar() {
   <!-- Título -->
   <h1 class="display-4 text-center">About</h1>
 
-  <h2>Contador: {{ count }}</h2>
+  <br>
+  <br>
 
-  <button class="btn btn-secondary" @click="incrementar">Incrementar Contador</button>
+  <label for="nome">Nome</label>
+  <input type="text" class="form-control" id="nome" v-model="perfil.nome">
+  <br>
+  <label for="idade">Idade</label>
+  <input type="text" class="form-control" id="idade" v-model="perfil.idade">
+  <br>
+
+  <button class="btn btn-primary" type="button" @click="verificaMaioridade()">Checar perfil idade</button>
+
+  <br>
+  <br>
+
+  <h3 v-if="perfil.nome && perfil.idade"> {{ infoPerfil }}</h3>
+
+  <div v-if="mostrarPerfilIdade">
+
+    <h2>Perfil de Idade é: </h2>
+
+    <h3 v-if="maiorIdade">Maior de Idade!</h3>
+    <h3 v-else>Menor de Idade!</h3>
+
+  </div>
 
   <br>
   <br>
